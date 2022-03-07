@@ -17,7 +17,7 @@ sys.path.insert(0, str(CURRENT_DIR))
 setuptools.setup(
     name="minetwister",
     version="0.01",
-    packages=["bin", "bin/minetwister"],
+    packages=["bin"],
     include_package_data=True,
     entry_points={"console_scripts": ["minetwister=bin.__main__:minetwister",],},
     author="Kobie Kirven",
