@@ -1,0 +1,125 @@
+BLASTN 2.12.0+
+
+
+Reference: Zheng Zhang, Scott Schwartz, Lukas Wagner, and Webb
+Miller (2000), "A greedy algorithm for aligning DNA sequences", J
+Comput Biol 2000; 7(1-2):203-14.
+
+
+
+Database: /Users/kobiekirven/Desktop/chr11.fna
+           1 sequences; 29,021,106 total letters
+
+
+
+Query= con
+
+Length=79
+                                                                      Score     E
+Sequences producing significant alignments:                          (Bits)  Value
+
+NC_029266.1 Oryza sativa Japonica Group cultivar Nipponbare chrom...  147     9e-36
+
+
+>NC_029266.1 Oryza sativa Japonica Group cultivar Nipponbare chromosome 
+11, IRGSP-1.0
+Length=29021106
+
+ Score = 147 bits (79),  Expect = 9e-36
+ Identities = 79/79 (100%), Gaps = 0/79 (0%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCTAGGTTTAGTAAATGACATAGCCGGTCCCAAGCCCG  60
+                 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+Sbjct  27354789  TAGGTAACTCCGCCTATGTCATCCTAGGTTTAGTAAATGACATAGCCGGTCCCAAGCCCG  27354848
+
+Query  61        GAAAAAGGAGGGGAACATC  79
+                 |||||||||||||||||||
+Sbjct  27354849  GAAAAAGGAGGGGAACATC  27354867
+
+
+ Score = 110 bits (59),  Expect = 1e-24
+ Identities = 68/72 (94%), Gaps = 1/72 (1%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCTAGGTTTAG-TAAATGACATAGCCGGTCCCAAGCCC  59
+                 ||||||||||||||||||||||| ||||||||  | ||||||||||||||||||||||||
+Sbjct  27265759  TAGGTAACTCCGCCTATGTCATCTTAGGTTTATCTGAATGACATAGCCGGTCCCAAGCCC  27265818
+
+Query  60        GGAAAAAGGAGG  71
+                 ||||||||||||
+Sbjct  27265819  GGAAAAAGGAGG  27265830
+
+
+ Score = 100 bits (54),  Expect = 7e-22
+ Identities = 67/73 (92%), Gaps = 2/73 (3%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCTA-GGTTTAG-TAAATGACATAGCCGGTCCCAAGCC  58
+                 ||||||||||||||||||||||| || ||  ||  |||||||||||||||||||||||||
+Sbjct  27274987  TAGGTAACTCCGCCTATGTCATCTTAAGGCGTAACTAAATGACATAGCCGGTCCCAAGCC  27275046
+
+Query  59        CGGAAAAAGGAGG  71
+                 |||||||||||||
+Sbjct  27275047  CGGAAAAAGGAGG  27275059
+
+
+ Score = 99.0 bits (53),  Expect = 3e-21
+ Identities = 66/72 (92%), Gaps = 1/72 (1%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCTAGGTTTAG-TAAATGACATAGCCGGTCCCAAGCCC  59
+                 || |||||||||||||||||||| || |||||  ||||||| ||||||||||||||||||
+Sbjct  27291338  TATGTAACTCCGCCTATGTCATCTTAAGTTTATCTAAATGATATAGCCGGTCCCAAGCCC  27291397
+
+Query  60        GGAAAAAGGAGG  71
+                 ||||||||||||
+Sbjct  27291398  GGAAAAAGGAGG  27291409
+
+
+ Score = 87.9 bits (47),  Expect = 6e-18
+ Identities = 68/77 (88%), Gaps = 6/77 (8%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCT-AGGTTTAGTAAATGACATAGCCGGTCCCAAGCCC  59
+                 ||||||||||||||||||||| | | |||| |  | ||||||||||||||||||||||||
+Sbjct  27251638  TAGGTAACTCCGCCTATGTCA-CTTGAGGTGTT-T-AATGACATAGCCGGTCCCAAGCCC  27251694
+
+Query  60        GGAAAA--AGGAGGGGA  74
+                 ||||||  |||||||||
+Sbjct  27251695  GGAAAAGGAGGAGGGGA  27251711
+
+
+ Score = 86.1 bits (46),  Expect = 2e-17
+ Identities = 69/79 (87%), Gaps = 6/79 (8%)
+ Strand=Plus/Plus
+
+Query  1         TAGGTAACTCCGCCTATGTCATCCT-AGGTTT-AGTA-AATGACATAGCCGGTCCCAAGC  57
+                 ||||||||||||||||||||| | | |||| | | |  ||||||||||||||||||||||
+Sbjct  27226222  TAGGTAACTCCGCCTATGTCA-CTTGAGGTGTGATTTTAATGACATAGCCGGTCCCAAGC  27226280
+
+Query  58        CCGGAAAA--AGGAGGGGA  74
+                 ||||||||  |||||||||
+Sbjct  27226281  CCGGAAAAGGAGGAGGGGA  27226299
+
+
+
+Lambda      K        H
+    1.33    0.621     1.12 
+
+Gapped
+Lambda      K        H
+    1.28    0.460    0.850 
+
+Effective search space used: 1683222930
+
+
+  Database: /Users/kobiekirven/Desktop/chr11.fna
+    Posted date:  Mar 7, 2022  1:06 PM
+  Number of letters in database: 29,021,106
+  Number of sequences in database:  1
+
+
+
+Matrix: blastn matrix 1 -2
+Gap Penalties: Existence: 0, Extension: 2.5
