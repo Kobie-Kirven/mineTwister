@@ -26,7 +26,11 @@ def minetwister():
 
     # Run minetwister
     build_blast_db(args.reference)
-    blast_query(args.query, args.reference, args.output)
+    blast_query(args.query, args.reference, "blast_output.tab")
+    
+    hits = parse_blast_output("blast_output.tab")
+    for hit in hits:
+        print(get_flanking_seq(args.reference, int(hit[8]), int(hit[9]), 100))
 
 if __name__ == "__main__":
     minetwister()

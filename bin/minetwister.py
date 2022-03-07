@@ -2,6 +2,7 @@
 # Functions for minetwister
 ###############################################################################
 import subprocess
+from Bio import SeqIO
 
 def build_blast_db(reference):
     """
@@ -19,6 +20,21 @@ def blast_query(query, reference, output):
     """
     print("Blasting query against reference genome")
     subprocess.run(
-        ["blastn", "-query", query, "-db", reference, "-out", output]
+        ["blastn", "-query", query, "-db", reference, "-out", output, "-outfmt", "6"]
     )
 
+
+def parse_blast_output(blast_output):
+    """
+    Parse blast output
+    """
+    return [line.strip("\n").split("\t") for line in open(blast_output).readlines()]
+
+
+
+def get_flanking_seq(genome, start, end, flanking_length):
+    """
+    Get flanking based on Blast hit
+    """
+    for rec in SeqIO.parse(genome, "fasta"):
+        return str(rec.seq[start-flanking_length:end+flanking_length])
