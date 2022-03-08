@@ -172,9 +172,10 @@ def minetwister():
                 picture_path = file
     
         html_output = build_html_output(args.reference, hit[1], hit[8], hit[9], rec.seq, picture_path)
-        with open(args.output, "a") as fh:
+        with open(args.output + ".html", "a") as fh:
             fh.write(html_output)
-    with open(args.output, "a") as fh:
+
+    with open(args.output + ".html", "a") as fh:
             fh.write("</html></body>")
     
     subprocess.run(["rm", "blast_output.tab"])
