@@ -9,7 +9,7 @@
 import argparse
 import subprocess
 from Bio import SeqIO
-import time
+import glob
 
 ###############################################################################
 # Functions for minetwister
@@ -145,8 +145,15 @@ def minetwister():
     # Build html output
     with open(args.output, "a") as fh:
             fh.write("<html><body>")
+
+    files = glob.glob("temp_res/results/svg/*.svg"))
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
-        html_output = build_html_output(args.reference, rec.id, hit[8], hit[9], rec.seq, "./temp_res/twister_figure.png")
+        picture_path = ""
+        for file in files:
+            if rec.id in file:
+                picture_path = file
+                
+        html_output = build_html_output(args.reference, rec.id, hit[8], hit[9], rec.seq, picture_path)
         with open(args.output, "a") as fh:
             fh.write(html_output)
     with open(args.output, "a") as fh:
