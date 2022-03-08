@@ -35,6 +35,7 @@ def blast_query(query, reference, output):
     subprocess.call(
         ["blastn", "-query", query, "-db", reference, "-out", output, "-outfmt",extended_command ]
     )
+    return 1
 
 def parse_blast_output(blast_output):
     """
@@ -59,9 +60,10 @@ def get_flanking_seq(genome, start, end, flanking_length):
 
 
 def run_r2dt(cms_data_path, singularity_image_path):
-    p1 = subprocess.call(["singularity","exec", "--bind",
+    subprocess.call(["singularity","exec", "--bind",
     cms_data_path + ":/rna/r2dt/data/cms",singularity_image_path, "r2dt.py", "draw", 
     "blast_fasta.fasta", "./temp_res"])
+    return 1
 
 def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     """
