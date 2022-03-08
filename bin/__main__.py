@@ -135,7 +135,6 @@ def minetwister():
     subprocess.Popen(
         ["blastn", "-query", args.query, "-db", args.reference, "-out",  "blast_output.tab", "-outfmt",extended_command ]
     ).wait()
-    time.sleep(30)
 
     # Parse blast output
     hits = parse_blast_output("blast_output.tab")
@@ -149,7 +148,7 @@ def minetwister():
 
 
     # Run r2dt
-    #run_r2dt(args.data, args.singularity)
+    run_r2dt(args.data, args.singularity)
     
 if __name__ == "__main__":
     minetwister()
