@@ -9,6 +9,7 @@
 import argparse
 import subprocess
 from Bio import SeqIO
+import time
 
 ###############################################################################
 # Functions for minetwister
@@ -143,6 +144,7 @@ def minetwister():
             else:
                 fh.write(f">potential_twister_{i}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
 
+    time.sleep(5)
     # Run r2dt
     run_r2dt(args.data, args.singularity)
     
