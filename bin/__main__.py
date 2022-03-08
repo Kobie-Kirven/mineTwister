@@ -164,7 +164,7 @@ def minetwister():
     with open(args.output + ".html", "w") as fh:
             fh.write("<html><body>")
 
-    files = glob.glob(args.output "/structures/*.svg")
+    files = glob.glob(args.output, "/structures/*.svg")
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
         picture_path = ""
         for file in files:
