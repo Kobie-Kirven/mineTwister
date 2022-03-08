@@ -141,10 +141,10 @@ def minetwister():
     with open("blast_fasta.fasta", "w") as fh:
         for i, hit in enumerate(hits):
             if hits[-1]== "Minus":
-                fh.write(f">potential_twister_{i}"+"\n"+rev_transcribe(get_flanking_seq(args.reference,hit[8], hit[9],50))+
+                fh.write(f">potential_twister_{str(i)}"+"\n"+rev_transcribe(get_flanking_seq(args.reference,hit[8], hit[9],50))+
                 "\n")
             else:
-                fh.write(f">potential_twister_{i}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
+                fh.write(f">potential_twister_{str(i)}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
 
 
     # Run r2dt
