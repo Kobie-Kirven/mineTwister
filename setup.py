@@ -22,6 +22,6 @@ setuptools.setup(
     entry_points={"console_scripts": ["minetwister=bin.__main__:minetwister",],},
     author="Kobie Kirven",
     description="mineTwister: a tool for mining genomes for twister ribozymes",
-    install_requires=["setuptools", "biopython", "pandas"],
+    install_requires=["setuptools", "biopython"],
     python_requires=">=3.5",
 )
