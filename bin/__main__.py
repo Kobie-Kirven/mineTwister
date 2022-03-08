@@ -78,8 +78,20 @@ def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     <h3>End: {}</h3>
     <h3>Sequence: {}</h3>
     </p>
-    <img src="{}" alt="image">
-    """.format(genome, scaffold, start, end, sequence, figure_path)
+    """.format(genome, scaffold, start, end, sequence)
+
+    if figure_path != "":
+        html_output += """
+        <p>
+        <img src="{}" width="800" height="600">
+        </p>
+        """.format(figure_path)
+    else:
+        html_output += """
+        <p>
+        <h3>No Structure Predicted</h3>
+        </p>
+        """
     return html_output
 
 ###############################################################################
@@ -119,6 +131,11 @@ def minetwister():
     #  Run minetwister
     #---------------------------------------------------------------------------
     
+    try:
+        subprocess.run(["mkdir", os.path.dirname(args.output)])
+    except FileExistsError:
+        pass
+
     # Build blast database from reference genome
     build_blast_db(args.reference)
     
@@ -142,21 +159,28 @@ def minetwister():
     # Run r2dt
     run_r2dt(args.data, args.singularity)
 
+    subprocess.run(["mv", "temp_res/results/svg", args.output + "/structures"])
     # Build html output
-    with open(args.output, "a") as fh:
+    with open(args.output + ".html", "w") as fh:
             fh.write("<html><body>")
 
-    files = glob.glob("temp_res/results/svg/*.svg")
+    files = glob.glob(args.output "/structures/*.svg")
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
         picture_path = ""
         for file in files:
             if rec.id in file:
                 picture_path = file
-
-        html_output = build_html_output(args.reference, rec.id, hit[8], hit[9], rec.seq, picture_path)
+    
+        html_output = build_html_output(args.reference, hit[1], hit[8], hit[9], rec.seq, picture_path)
         with open(args.output, "a") as fh:
             fh.write(html_output)
     with open(args.output, "a") as fh:
             fh.write("</html></body>")
+    
+    subprocess.run(["rm", "blast_output.tab"])
+    subprocess.run(["rm", "blast_fasta.fasta"])
+    subprocess.run(["rm", "-r", "temp_res"])
+
+
 if __name__ == "__main__":
     minetwister()
