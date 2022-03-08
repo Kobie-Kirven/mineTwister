@@ -20,7 +20,7 @@ def build_blast_db(reference):
     Build blast database from reference genome
     """
     print("Building blast database from reference genome")
-    subprocess.call(
+    subprocess.run(
         ["makeblastdb", "-in", reference, "-dbtype", "nucl"]
     )
     
@@ -33,10 +33,10 @@ def blast_query(query, reference, output):
     print("Blasting query against reference genome")
 
     extended_command = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand"
-    subprocess.call(
+    subprocess.Popen(
         ["blastn", "-query", query, "-db", reference, "-out", output, "-outfmt",extended_command ]
-    )
-    return 1
+    ).wait()
+    
 
 def parse_blast_output(blast_output):
     """
@@ -61,7 +61,7 @@ def get_flanking_seq(genome, start, end, flanking_length):
 
 
 def run_r2dt(cms_data_path, singularity_image_path):
-    subprocess.call(["singularity","exec", "--bind",
+    subprocess.run(["singularity","exec", "--bind",
     cms_data_path + ":/rna/r2dt/data/cms",singularity_image_path, "r2dt.py", "draw", 
     "blast_fasta.fasta", "./temp_res"])
     return 1
@@ -144,7 +144,7 @@ def minetwister():
             else:
                 fh.write(f">potential_twister_{i}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
 
-    time.sleep(5)
+
     # Run r2dt
     run_r2dt(args.data, args.singularity)
     
