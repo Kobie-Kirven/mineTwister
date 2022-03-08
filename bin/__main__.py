@@ -134,7 +134,7 @@ def minetwister():
     extended_command = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand"
     subprocess.Popen(
         ["blastn", "-query", args.query, "-db", args.reference, "-out",  "blast_output.tab", "-outfmt",extended_command ]
-    ).wait())
+    ).wait()
     
 
     # Parse blast output
