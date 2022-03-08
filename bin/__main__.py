@@ -71,12 +71,6 @@ def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     Build html output
     """
     html_output = """
-    <html>
-    <head>
-    <title>MineTwister</title>
-    </head>
-    <body>
-    <h1>Potential Twisters</h1>
     <p>
     <h3>Genome: {}</h3>
     <h3>Scaffold: {}</h3>
@@ -85,8 +79,6 @@ def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     <h3>Sequence: {}</h3>
     </p>
     <img src="{}" alt="image">
-    </body>
-    </html>
     """.format(genome, scaffold, start, end, sequence, figure_path)
     return html_output
 
@@ -149,6 +141,15 @@ def minetwister():
 
     # Run r2dt
     run_r2dt(args.data, args.singularity)
-    
+
+    # Build html output
+    with open(args.output, "a") as fh:
+            fh.write("<html><body>")
+    for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
+        html_output = build_html_output(args.reference, rec.id, hit[8], hit[9], rec.seq, "./temp_res/twister_figure.png")
+        with open(args.output, "a") as fh:
+            fh.write(html_output)
+    with open(args.output, "a") as fh:
+            fh.write("</html></body>")
 if __name__ == "__main__":
     minetwister()
