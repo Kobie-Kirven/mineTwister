@@ -135,7 +135,7 @@ def minetwister():
     subprocess.Popen(
         ["blastn", "-query", args.query, "-db", args.reference, "-out",  "blast_output.tab", "-outfmt",extended_command ]
     ).wait()
-    
+    time.sleep(30)
 
     # Parse blast output
     hits = parse_blast_output("blast_output.tab")
