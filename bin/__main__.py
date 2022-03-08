@@ -19,7 +19,7 @@ def build_blast_db(reference):
     Build blast database from reference genome
     """
     print("Building blast database from reference genome")
-    p1 = subprocess.call(
+    p1 = subprocess.run(
         ["makeblastdb", "-in", reference, "-dbtype", "nucl"]
     )
     p1.wait()
