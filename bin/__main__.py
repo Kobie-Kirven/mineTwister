@@ -131,7 +131,10 @@ def minetwister():
     build_blast_db(args.reference)
     
     # Blast query against reference genome
-    blast_query(args.query, args.reference, "blast_output.tab")
+    extended_command = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand"
+    subprocess.Popen(
+        ["blastn", "-query", args.query, "-db", args.reference, "-out",  "blast_output.tab", "-outfmt",extended_command ]
+    ).wait())
     
 
     # Parse blast output
