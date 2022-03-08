@@ -57,7 +57,7 @@ def get_flanking_seq(genome, start, end, flanking_length):
     Get flanking based on Blast hit
     """
     for rec in SeqIO.parse(genome, "fasta"):
-        return str(rec.seq[start-flanking_length:end+flanking_length])
+        return str(rec.seq[int(start)-int(flanking_length):int(end)+int(flanking_length)])
 
 
 def run_r2dt(cms_data_path, singularity_image_path):
