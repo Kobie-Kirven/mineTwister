@@ -132,7 +132,7 @@ def minetwister():
     #---------------------------------------------------------------------------
     
     try:
-        subprocess.run(["mkdir", os.path.dirname(args.output)])
+        subprocess.run(["mkdir", args.output])
     except FileExistsError:
         pass
 
