@@ -146,13 +146,13 @@ def minetwister():
     with open(args.output, "a") as fh:
             fh.write("<html><body>")
 
-    files = glob.glob("temp_res/results/svg/*.svg"))
+    files = glob.glob("temp_res/results/svg/*.svg")
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
         picture_path = ""
         for file in files:
             if rec.id in file:
                 picture_path = file
-                
+
         html_output = build_html_output(args.reference, rec.id, hit[8], hit[9], rec.seq, picture_path)
         with open(args.output, "a") as fh:
             fh.write(html_output)
