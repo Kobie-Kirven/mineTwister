@@ -19,9 +19,10 @@ def build_blast_db(reference):
     Build blast database from reference genome
     """
     print("Building blast database from reference genome")
-    subprocess.call(
+    p1 = subprocess.call(
         ["makeblastdb", "-in", reference, "-dbtype", "nucl"]
     )
+    p1.wait()
 
 
 def blast_query(query, reference, output):
@@ -31,10 +32,10 @@ def blast_query(query, reference, output):
     print("Blasting query against reference genome")
 
     extended_command = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand"
-    subprocess.run(
+    p1 = subprocess.run(
         ["blastn", "-query", query, "-db", reference, "-out", output, "-outfmt",extended_command ]
     )
-
+    p1.wait()
 
 def parse_blast_output(blast_output):
     """
@@ -59,10 +60,10 @@ def get_flanking_seq(genome, start, end, flanking_length):
 
 
 def run_r2dt(cms_data_path, singularity_image_path):
-    subprocess.run(["singularity","exec", "--bind",
+    p1 = subprocess.run(["singularity","exec", "--bind",
     cms_data_path + ":/rna/r2dt/data/cms",singularity_image_path, "r2dt.py", "draw", 
     "blast_fasta.fasta", "./temp_res"])
-
+    p1.wait()
 
 def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     """
@@ -126,11 +127,11 @@ def minetwister():
     #---------------------------------------------------------------------------
     
     # Build blast database from reference genome
-    p1 = build_blast_db(args.reference)
-    p1.wait()
+    build_blast_db(args.reference)
+    
     # Blast query against reference genome
-    p2 = blast_query(args.query, args.reference, "blast_output.tab")
-    p2.wait()
+    blast_query(args.query, args.reference, "blast_output.tab")
+    
 
     # Parse blast output
     hits = parse_blast_output("blast_output.tab")
@@ -143,7 +144,7 @@ def minetwister():
                 fh.write(f">potential_twister_{i}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
 
     # Run r2dt
-    p3 = run_r2dt(args.data, args.singularity)
-    p3.wait()
+    run_r2dt(args.data, args.singularity)
+    
 if __name__ == "__main__":
     minetwister()
