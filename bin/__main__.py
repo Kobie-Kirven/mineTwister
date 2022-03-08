@@ -19,7 +19,7 @@ def build_blast_db(reference):
     Build blast database from reference genome
     """
     print("Building blast database from reference genome")
-    subprocess.run(
+    subprocess.call(
         ["makeblastdb", "-in", reference, "-dbtype", "nucl"]
     )
 
@@ -126,11 +126,12 @@ def minetwister():
     #---------------------------------------------------------------------------
     
     # Build blast database from reference genome
-    build_blast_db(args.reference)
-
+    p1 = build_blast_db(args.reference)
+    p1.wait()
     # Blast query against reference genome
-    blast_query(args.query, args.reference, "blast_output.tab")
-    
+    p2 = blast_query(args.query, args.reference, "blast_output.tab")
+    p2.wait()
+
     # Parse blast output
     hits = parse_blast_output("blast_output.tab")
     with open("blast_fasta.fasta", "w") as fh:
@@ -142,7 +143,7 @@ def minetwister():
                 fh.write(f">potential_twister_{i}" + "\n" + get_flanking_seq(args.reference,hit[8], hit[9],50) + "\n")
 
     # Run r2dt
-    run_r2dt(args.data, args.singularity)
-
+    p3 = run_r2dt(args.data, args.singularity)
+    p3.wait()
 if __name__ == "__main__":
     minetwister()
