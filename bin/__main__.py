@@ -149,7 +149,7 @@ def minetwister():
 
 
     # Run r2dt
-    run_r2dt(args.data, args.singularity)
+    #run_r2dt(args.data, args.singularity)
     
 if __name__ == "__main__":
     minetwister()
