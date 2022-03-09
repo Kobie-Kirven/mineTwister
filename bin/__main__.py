@@ -219,7 +219,8 @@ def minetwister():
         fh.write("<html><body>")
 
     files = glob.glob(args.output + "/structures/*.svg")
-
+    
+    i = 0
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
         picture_path = ""
         for file in files:
@@ -227,10 +228,11 @@ def minetwister():
                 picture_path = file
 
         html_output = build_html_output(
-            args.reference, hit[1], hit[8], hit[9], str(rec.seq), picture_path
+            args.reference, hits[i][1], hits[i][8], hits[i][9], str(rec.seq), picture_path
         )
         with open(args.output + ".html", "a") as fh:
             fh.write(html_output)
+        i += 1
 
     with open(args.output + ".html", "a") as fh:
         fh.write("</html></body>")
@@ -240,7 +242,7 @@ def minetwister():
     subprocess.run(["rm", "-r", "temp_res"])
 
     print("There were {} hits found!".format(len(hits)))
-    
+
     print("Thank you for using minetwister!")
 if __name__ == "__main__":
     minetwister()
