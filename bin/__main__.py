@@ -94,7 +94,7 @@ def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     """
     seq_chunks = []
     i,flag = 0,True
-    while flag == True
+    while flag == True:
         if i + 50 < len(sequence):
             seq_chunks.append(sequence[i : i + 50])
             i += 50
@@ -157,7 +157,7 @@ def minetwister():
     parser.add_argument("-o", dest="output", help="output", required=True)
 
     args = parser.parse_args()
-    print(args)
+    
 
     # ---------------------------------------------------------------------------
     #  Run minetwister
@@ -171,6 +171,7 @@ def minetwister():
     # Build blast database from reference genome
     build_blast_db(args.reference)
 
+    print("Blasting query against reference genome")
     # Blast query against reference genome
     extended_command = "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore sstrand"
     subprocess.run(
@@ -209,6 +210,7 @@ def minetwister():
                 )
 
     # Run r2dt
+    print("Running r2dt")
     run_r2dt(args.data, args.singularity)
 
     subprocess.run(["mv", "temp_res/results/svg", args.output + "/structures"])
@@ -217,6 +219,7 @@ def minetwister():
         fh.write("<html><body>")
 
     files = glob.glob(args.output + "/structures/*.svg")
+
     for rec in SeqIO.parse("blast_fasta.fasta", "fasta"):
         picture_path = ""
         for file in files:
@@ -236,6 +239,7 @@ def minetwister():
     subprocess.run(["rm", "blast_fasta.fasta"])
     subprocess.run(["rm", "-r", "temp_res"])
 
-
+    print("There were {} hits found!".format(len(hits)))")
+    print("Thank you for using minetwister!")
 if __name__ == "__main__":
     minetwister()
