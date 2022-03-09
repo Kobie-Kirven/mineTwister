@@ -93,15 +93,18 @@ def build_html_output(genome, scaffold, start, end, sequence, figure_path):
     Build html output
     """
     seq_chunks = []
-    for i in range(len(sequence)):
+    i,flag = 0,True
+    while flag == True
         if i + 50 < len(sequence):
             seq_chunks.append(sequence[i : i + 50])
             i += 50
         else:
             seq_chunks.append(sequence[i:])
+            flag = False
 
     html_output = """
     <p>
+    <hr size="3" width="90%" color="black"> 
     <h3>Genome: {}</h3>
     <h3>Scaffold: {}</h3>
     <h3>Start: {}</h3>
