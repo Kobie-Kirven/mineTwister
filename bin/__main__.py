@@ -239,7 +239,8 @@ def minetwister():
     subprocess.run(["rm", "blast_fasta.fasta"])
     subprocess.run(["rm", "-r", "temp_res"])
 
-    print("There were {} hits found!".format(len(hits)))")
+    print("There were {} hits found!".format(len(hits)))
+    
     print("Thank you for using minetwister!")
 if __name__ == "__main__":
     minetwister()
