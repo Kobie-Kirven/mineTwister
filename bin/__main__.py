@@ -196,7 +196,7 @@ def minetwister():
                     f">potential_twister_{str(i)}"
                     + "\n"
                     + rev_transcribe(
-                        get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50)
+                        get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50).upper()
                     )
                     + "\n"
                 )
@@ -204,7 +204,7 @@ def minetwister():
                 fh.write(
                     f">potential_twister_{str(i)}"
                     + "\n"
-                    + get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50)
+                    + get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50).upper()
                     + "\n"
                 )
 
