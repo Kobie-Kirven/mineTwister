@@ -84,7 +84,7 @@ def run_r2dt(cms_data_path, singularity_image_path):
             "draw",
             "blast_fasta.fasta",
             "./temp_res",
-        ]
+        ],
     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
@@ -181,7 +181,7 @@ def minetwister():
             "blast_output.tab",
             "-outfmt",
             extended_command,
-        ]
+        ],
     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # Parse blast output
