@@ -237,7 +237,7 @@ def minetwister():
     with open(args.output + ".html", "a") as fh:
         fh.write("</html></body>")
 
-    subprocess.run(["rm", "blast_output.tab"])
+    #subprocess.run(["rm", "blast_output.tab"])
     subprocess.run(["rm", "blast_fasta.fasta"])
     subprocess.run(["rm", "-r", "temp_res"])
 
