@@ -44,9 +44,9 @@ def blast_query(query, reference, output):
             "-outfmt",
             extended_command,
         ]
-    , stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    )
 
-
+# , stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
 def parse_blast_output(blast_output):
     """
     Parse blast output
@@ -62,14 +62,15 @@ def rev_transcribe(dna):
     return "".join([replace_dict[base] for base in dna][::-1])
 
 
-def get_flanking_seq(genome, start, end, flanking_length):
+def get_flanking_seq(genome, scaffold, start, end, flanking_length):
     """
     Get flanking based on Blast hit
     """
     for rec in SeqIO.parse(genome, "fasta"):
-        return str(
-            rec.seq[int(start) - int(flanking_length) : int(end) + int(flanking_length)]
-        )
+        if rec.id == scaffold:
+            return str(
+                rec.seq[int(start) - int(flanking_length) : int(end) + int(flanking_length)]
+            )
 
 
 def run_r2dt(cms_data_path, singularity_image_path):
@@ -84,8 +85,7 @@ def run_r2dt(cms_data_path, singularity_image_path):
             "draw",
             "blast_fasta.fasta",
             "./temp_res",
-        ],
-    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ])
 
 
 def build_html_output(genome, scaffold, start, end, sequence, figure_path):
@@ -185,8 +185,7 @@ def minetwister():
             "blast_output.tab",
             "-outfmt",
             extended_command,
-        ],
-    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        ])
 
     # Parse blast output
     hits = parse_blast_output("blast_output.tab")
@@ -197,7 +196,7 @@ def minetwister():
                     f">potential_twister_{str(i)}"
                     + "\n"
                     + rev_transcribe(
-                        get_flanking_seq(args.reference, hit[8], hit[9], 50)
+                        get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50)
                     )
                     + "\n"
                 )
@@ -205,7 +204,7 @@ def minetwister():
                 fh.write(
                     f">potential_twister_{str(i)}"
                     + "\n"
-                    + get_flanking_seq(args.reference, hit[8], hit[9], 50)
+                    + get_flanking_seq(args.reference, hit[1], hit[8], hit[9], 50)
                     + "\n"
                 )
 
