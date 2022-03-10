@@ -60,9 +60,9 @@ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/433/935/GCF_001433935.1_IR
 gunzip GCF_001433935.1_IRGSP-1.0_genomic.fna.gz
 ```
 
-Great! Now we have our genome, now all we need is our concensus sequence. We can download this as well:
+Great! Now we have our genome, now all we need is our consensus sequence. We can download this as well:
 ```
-wget https://raw.githubusercontent.com/Kobie-Kirven/mineTwister/blob/main/examples/concensus.fa
+wget https://github.com/Kobie-Kirven/mineTwister/raw/main/examples/consensus.fa
 ```
 
 Cool, now we have everything we need to run mineTwister. Let's make sure that mineTwister is up and running.
@@ -82,3 +82,10 @@ options:
 ```
 
 Now let's try to run it for real. 
+
+```
+minetwister -i GCF_001433935.1_IRGSP-1.0_genomic.fna -c consensus.fa -s ./r2dt -d ./r2dt-data-cms-dev/ -o rice
+```
+
+You should see a ```rice.html``` file and when you open it, it should look like this:
+<img src="https://github.com/Kobie-Kirven/mineTwister/blob/main/examples/sample_output_minetwister.png" width="300">
