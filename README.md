@@ -62,7 +62,7 @@ gunzip GCF_001433935.1_IRGSP-1.0_genomic.fna.gz
 
 Great! Now we have our genome, now all we need is our concensus sequence. We can download this as well:
 ```
-wget https://raw.githubusercontent.com/Kobie-Kirven/mineTwister/examples/concensus.fa
+wget https://raw.githubusercontent.com/Kobie-Kirven/mineTwister/blob/main/examples/concensus.fa
 ```
 
 Cool, now we have everything we need to run mineTwister. Let's make sure that mineTwister is up and running.
